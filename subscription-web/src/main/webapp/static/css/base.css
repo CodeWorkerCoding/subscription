@@ -1,0 +1,169 @@
+@CHARSET "UTF-8";
+
+body{
+	font-family: "Microsoft YaHei","Microsoft YaHei UI";
+}
+.sm-hr30 {
+    height: 30px;
+}
+.sm-hr60 {
+    height:60px;
+}
+.img-icon{
+	width:50px;
+	height:28px;
+}
+
+.box-radius-border{
+    border:1px solid #ddd;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+}
+
+.sm-pull-center{
+	display: table;
+	margin: 0 auto !important;
+}
+.sm-pull-right{
+	text-align: right !important;
+}
+
+.sm-tc{
+	text-align: center;
+}
+
+.sm-section .sm-title{
+	background-color: #F0F2F5;
+	padding: 10px 20px;
+	font-size: 16px;
+	color: #000;
+	font-weight: bold;
+}
+.sm-section .row,
+.sm-section .form-group {
+	line-height: 28px;
+	font-size:15px;
+}
+
+.sm-section .sm-text{
+	color:#474F59;
+}
+.sm-section .col-sm-2.control-label,
+.sm-section .col-sm-4.control-label{
+    text-align: right;
+}
+.sm-section .col-sm-4,.sm-section .col-sm-10.sgroup{
+    color:#474F59;
+}
+.sm-section .form-group{
+	min-height: 30px;
+}
+
+.navbar-clear{
+	height:50px;
+	clear:both;
+}
+.sm-amount{
+	text-align: right !important;
+}
+
+.sm-sidebar .container-fluid{
+	padding:0;
+}
+
+.sm-sidebar .navbar-header{
+	background-color:#192350;
+}
+.sm-sidebar .logo-expanded{
+	padding: 0;
+	width: 200px;
+	line-height: 55px;
+	color:#fff;
+	font-size: 24px;
+}
+.sm-sidebar .logo-expanded b{
+	font-size: 30px;
+	font-weight: normal;
+}
+.sm-sidebar .logo-env .logo{
+	height:55px;
+	text-align: center;
+}
+.sm-sidebar .logo-env .logo .logo-collapsed{
+	color:#fff;
+	font-size: 20px;
+}
+
+.sm-navbar .navbar-form{
+	margin-top:10px;
+}
+.sm-navbar .form-control{
+	height: 40px;
+	width: 300px;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	border-radius:5px;
+	-webkit-box-shadow: inset 0px 1px 3px #ddd;
+	-moz-box-shadow: inset 0px 1px 3px #ddd;
+	box-shadow: inset 0px 1px 3px #ddd;
+}
+.sm-group .input-group-addon{
+	background: #56C0E0;
+	color: #fff;
+	border-color: #3FB8DC;
+	cursor: pointer;
+}
+
+/*==bootstrap docs.min.css样式更新===============================*/
+.bs-docs-sidebar .nav>li>a{
+	padding: 6px 20px;
+	font-size: 14px;
+	border-left: 2px solid #ddd;
+}
+.bs-docs-sidebar .nav>.active:focus>a,
+.bs-docs-sidebar .nav>.active:hover>a,
+.bs-docs-sidebar .nav>.active>a {
+	font-weight: normal;
+}
+
+/*==bootstrap样式更新============================================*/
+.nav:after, .navbar:after, .navbar-header:after, .navbar-collapse:after{
+	border-bottom: 1px solid #ddd;
+}
+.breadcrumb > li.active{
+	font-weight: bold;
+	font-size: 20px;
+}
+.breadcrumb > li + li:before{
+	content: '>';
+	font-size: 14px;
+}
+.row {
+	margin:0;
+}
+.container-fluid{
+	background-color: #fff;
+}
+.input-lg{
+	height:46px;
+}
+.select.input-lg{
+	height: 46px;
+}
+.search-env form button[type="submit"]{
+	line-height: 41px !important;
+}
+
+.form-inline .control-label{
+	min-width:110px;
+	text-align:right;
+}
+.form-inline .form-control{
+	min-width:200px;
+}
+.form-inline .form_date.control-label{
+	width:160px;
+}
+
+
