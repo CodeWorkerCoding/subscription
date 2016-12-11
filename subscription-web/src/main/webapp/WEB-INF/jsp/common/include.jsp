@@ -3,6 +3,10 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--end--%>
 
+<%--set ctx value--%>
+<c:set var="ctx" value="${pageContext.request.contextPath}"></c:set>
+<%--end--%>
+
 <%--icon--%>
 <link href="${ctx}/static/shenma.ico" rel="icon">
 <%--end--%>

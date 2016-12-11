@@ -31,6 +31,10 @@ public class Goods implements Serializable {
 
     @Getter
     @Setter
+    private Integer saleCount;
+
+    @Getter
+    @Setter
     private String goodsImgPath;
 
     @Getter
