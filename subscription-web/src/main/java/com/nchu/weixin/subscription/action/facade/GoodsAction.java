@@ -1,5 +1,6 @@
-package com.nchu.weixin.subscription.action;
+package com.nchu.weixin.subscription.action.facade;
 
+import com.nchu.weixin.subscription.domain.Goods;
 import com.nchu.weixin.subscription.service.common.GoodsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,28 @@ public class GoodsAction {
         log.info("hint this goods list method");
 //        goodsService.create(null);
         return "facade/goods/list";
+    }
+
+    @RequestMapping(value = "/manage/list",
+            method = {RequestMethod.GET})
+    public String manageList(@RequestParam Map paramMap,
+                       @RequestParam(name = "pageNo",required = false) Integer pageNo,
+                       @RequestParam(name = "pageSize", required = false) Integer pageSize){
+        log.info("hint this goods manage list method");
+        return "manage/goods/list";
+    }
+
+
+    @RequestMapping(value = "/create", method = {RequestMethod.GET})
+    public String create(){
+        log.info("hint this goods create get method");
+        return "manager/goods/create";
+    }
+
+    @RequestMapping(value = "/create", method = {RequestMethod.POST})
+    public String handleAdd(Goods goods){
+        log.info("hint this goods create Post method");
+        return "manager/goods/create";
     }
 
     @RequestMapping(value = "/{id}/info",

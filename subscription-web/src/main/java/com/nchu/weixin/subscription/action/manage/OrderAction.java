@@ -1,4 +1,4 @@
-package com.nchu.weixin.subscription.action;
+package com.nchu.weixin.subscription.action.manage;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Map;
 
 /**
- * 订单控制器
+ * 订单管理控制器
  * Created by fujianjian on 2016/12/11.
  */
 @Controller

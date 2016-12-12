@@ -1,9 +1,11 @@
 package com.nchu.weixin.subscription.domain;
 
 import com.nchu.weixin.subscription.enums.GoodsStatusEnum;
+import com.nchu.weixin.subscription.utils.UUidUtil;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -11,10 +13,13 @@ import java.util.Date;
  * 商品模型
  * Created by fujianjian on 2016/12/10.
  */
+@Entity
+@Table(name = "subscription_goods")
 public class Goods implements Serializable {
 
     @Getter
     @Setter
+    @Id
     private String id;
 
     @Getter
@@ -48,4 +53,15 @@ public class Goods implements Serializable {
     @Getter
     @Setter
     private Date modifiedTime;
+
+    @PrePersist
+    public void onCreate(){
+        this.id = UUidUtil.getUUid();
+        this.createdTime = new Date();
+    }
+
+    @PreUpdate
+    public void onUpdate(){
+        this.modifiedTime = new Date();
+    }
 }

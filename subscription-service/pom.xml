@@ -2,17 +2,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.nchu.weixin.subscription</groupId>
+    <artifactId>subscription-service</artifactId>
+    <packaging>jar</packaging>
+
     <parent>
         <artifactId>subscription</artifactId>
         <groupId>com.nchu.weixin.subscription</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
-
-    <groupId>com.nchu.weixin.subscription</groupId>
-    <artifactId>subscription-service</artifactId>
-    <version>1.0-SNAPSHOT</version>
-
 
     <dependencies>
         <!--开源依赖-->
@@ -24,12 +24,12 @@
         <dependency>
             <groupId>com.nchu.weixin.subscription</groupId>
             <artifactId>subscription-module</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.nchu.weixin.subscription</groupId>
             <artifactId>subscription-utils</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 </project>

@@ -1,8 +1,10 @@
 package com.nchu.weixin.subscription.domain;
 
+import com.nchu.weixin.subscription.utils.UUidUtil;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -10,10 +12,13 @@ import java.util.Date;
  * 订单详情模型
  * Created by Alen on 2016/12/10.
  */
+@Entity
+@Table(name = "subscription_order_detail")
 public class OrderDetail implements Serializable{
 
     @Getter
     @Setter
+    @Id
     private String id;
 
     @Getter
@@ -43,4 +48,15 @@ public class OrderDetail implements Serializable{
     @Getter
     @Setter
     private Date modifiedTime;
+
+    @PrePersist
+    public void onCreate(){
+        this.id = UUidUtil.getUUid();
+        this.createdTime = new Date();
+    }
+
+    @PreUpdate
+    public void onUpdate(){
+        this.modifiedTime = new Date();
+    }
 }
