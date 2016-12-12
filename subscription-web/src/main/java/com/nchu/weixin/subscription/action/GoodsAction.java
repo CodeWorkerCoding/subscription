@@ -27,10 +27,10 @@ public class GoodsAction {
     @RequestMapping(value = "/list",
      method = {RequestMethod.GET})
     public String list(@RequestParam Map paramMap,
-         @RequestParam(name = "pageNo") Integer pageNo,
-         @RequestParam(name = "pageSize") Integer pageSize){
+         @RequestParam(name = "pageNo",required = false) Integer pageNo,
+         @RequestParam(name = "pageSize", required = false) Integer pageSize){
         log.info("hint this goods list method");
-        goodsService.create(null);
+//        goodsService.create(null);
         return "facade/goods/list";
     }
 

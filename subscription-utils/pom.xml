@@ -39,6 +39,11 @@
             <version>1.16.10</version>
         </dependency>
 
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+
         <!--本工程的项目依赖-->
         <dependency>
             <groupId>com.nchu.weixin.subscription</groupId>

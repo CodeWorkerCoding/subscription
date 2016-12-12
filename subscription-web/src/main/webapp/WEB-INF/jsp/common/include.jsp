@@ -11,13 +11,16 @@
 <link href="${ctx}/static/shenma.ico" rel="icon">
 <%--end--%>
 
+<%--self style--%>
+<link href="${ctx}/static/css/common.css">
+<%--end--%>
+
 <%--bootstrap--%>
 <link rel="stylesheet" href="${ctx}/static/plugin/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="${ctx}/static/plugin/bootstrap/css/bootstrap-datetimepicker.min.css">
 <script src="${ctx}/static/plugin/bootstrap/js/bootstrap.min.js" ></script>
-<script src="${ctx}/static/plugin/bootstrap/js/bootstrap-datetimepicker.js" ></script>
-<script src="${ctx}/static/plugin/bootstrap/js/bootstrap-datetimepicker.zh-CN.js" ></script>
-<script src="${ctx}/static/plugin/bootstrap/confirm/jquery-confirm.js" ></script>
+<%--<script src="${ctx}/static/plugin/bootstrap/js/bootstrap-datetimepicker.js" ></script>
+<script src="${ctx}/static/plugin/bootstrap/js/bootstrap-datetimepicker.zh-CN.js" ></script>--%>
 <%--end--%>
 
 <%--jquery--%>
