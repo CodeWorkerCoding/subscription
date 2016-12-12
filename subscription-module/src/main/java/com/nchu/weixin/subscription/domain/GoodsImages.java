@@ -1,6 +1,6 @@
 package com.nchu.weixin.subscription.domain;
 
-import com.nchu.weixin.subscription.utils.UUidUtil;
+import com.nchu.weixin.subscription.tools.UUidUtil;
 import lombok.Getter;
 import lombok.Setter;
 

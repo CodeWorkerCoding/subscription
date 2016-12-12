@@ -22,6 +22,7 @@
         <module>subscription-service-impl</module>
         <module>subscription-utils</module>
         <module>subscription-web</module>
+        <module>subscription-plugin</module>
     </modules>
 
 

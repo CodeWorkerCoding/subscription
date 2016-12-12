@@ -22,13 +22,6 @@
         </dependency>
         <!--end-->
 
-        <!--hibernate 依赖-->
-        <!--<dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-        </dependency>-->
-        <!--end-->
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -38,7 +31,7 @@
         <!--本工程的项目依赖-->
         <dependency>
             <groupId>com.nchu.weixin.subscription</groupId>
-            <artifactId>subscription-utils</artifactId>
+            <artifactId>subscription-plugin</artifactId>
             <version>${project.version}</version>
         </dependency>
    </dependencies>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:sec="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/security
+       http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <sec:http use-expressions="true" auto-config="true" >
+        <sec:form-login default-target-url="/" login-page="/login" />
+        <sec:http-basic />
+        <sec:logout logout-url="/logout" logout-success-url="/" delete-cookies="true" />
+        <sec:intercept-url pattern="/login" access="permitAll" />
+        <sec:intercept-url pattern="/error" access="permitAll" />
+        <sec:intercept-url pattern="/logout" access="permitAll" />
+        <sec:intercept-url pattern="/public/**" access="permitAll" />
+        <sec:intercept-url pattern="/static/**" access="permitAll" />
+        <sec:intercept-url pattern="/j_spring_security_check" access="permitAll" />
+        <sec:intercept-url pattern="/favicon.ico" access="permitAll" />
+        <sec:intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')" />
+        <sec:intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+        <!--<sec:access-denied-handler ref="accessDeniedHandler"/>-->
+    </sec:http>
+
+    <sec:global-method-security pre-post-annotations="enabled"/>
+
+    <sec:authentication-manager>
+        <sec:authentication-provider>
+            <sec:user-service>
+                <sec:user name="admin" password="123" authorities="ROLE_USER, ROLE_ADMIN,ROLE_OPERATOR,ROLE_FINANCE"/>
+            </sec:user-service>
+        </sec:authentication-provider>
+    </sec:authentication-manager>
+
+</beans>
