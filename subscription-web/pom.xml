@@ -75,6 +75,11 @@
 			<artifactId>subscription-service-impl</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.nchu.weixin.subscription</groupId>
+			<artifactId>subscription-plugin</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 		<!--end-->
 
 	</dependencies>

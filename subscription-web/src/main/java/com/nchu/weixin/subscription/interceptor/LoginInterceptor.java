@@ -1,7 +1,7 @@
 package com.nchu.weixin.subscription.interceptor;
 
 import com.nchu.weixin.subscription.domain.component.UserContext;
-import lombok.extern.slf4j.Slf4j;
+import com.nchu.weixin.subscription.tools.StringHelper;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -13,39 +13,39 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * 订阅号项目 全局拦截器
- * Created by fujianjian on 2016/12/12.
+ * 登入拦截器
+ * Created by fujianjian on 2016/12/13.
  */
 @Component
-@Slf4j
-public class SubscriptionInterceptor implements HandlerInterceptor {
-
-    private static final ThreadLocal<Long> arriveTime = new ThreadLocal<Long>();
-
+public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o)
             throws Exception {
-        log.info("Begin an invoke`" + request.getRequestURI() + "`");
-        arriveTime.set(System.currentTimeMillis());
-        return true;
+        String username = UserContext.getUserName();
+        if (StringHelper.isNotEmpty(username)){
+            //先不删除，万一spring security自带的限制一处登录功能不好用，或者将来实现集群则可以启用它。
+            HttpSession session = request.getSession(false);
+            if (!request.getRequestURI().startsWith("/facade") && !request.getRequestURI().startsWith("/login")) {
+                //session 过期重新登入
+                if (session == null) {
+                    response.sendRedirect("/logout");
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object o,
                            ModelAndView modelAndView)
             throws Exception {
-
-        Long arrive = arriveTime.get();
-        long costTime = System.currentTimeMillis() - arrive;
-        if (costTime > 2000) {
-            log.warn(String.format("End an invoke`%s`. Cost time`%.1f`s. With slowness.\n", request.getRequestURI(), costTime/1000.0));
-        } else {
-            log.info(String.format("End an invoke`%s`. Cost time`%.1f`s.\n", request.getRequestURI(), costTime/1000.0));
-        }
     }
 
     @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response,
+    public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
                                 Object o, Exception e)
             throws Exception {
 

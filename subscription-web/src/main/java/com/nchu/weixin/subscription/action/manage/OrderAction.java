@@ -12,7 +12,7 @@ import java.util.Map;
  * Created by fujianjian on 2016/12/11.
  */
 @Controller
-@RequestMapping("/order")
+@RequestMapping("/manage/order")
 @Slf4j
 public class OrderAction {
 

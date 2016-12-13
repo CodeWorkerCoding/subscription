@@ -16,7 +16,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/manage/goods")
 @Slf4j
-public class GoodsAction {
+public class GoodsManageAction {
 
     @RequestMapping(value = "/list",
             method = {RequestMethod.GET})

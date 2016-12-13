@@ -18,7 +18,7 @@ import java.util.Map;
  * Created by fujianjian on 2016/12/10.
  */
 @Controller
-@RequestMapping("/goods")
+@RequestMapping("/facade/goods")
 @Slf4j
 public class GoodsAction {
 
@@ -34,29 +34,6 @@ public class GoodsAction {
 //        goodsService.create(null);
         return "facade/goods/list";
     }
-
-    @RequestMapping(value = "/manage/list",
-            method = {RequestMethod.GET})
-    public String manageList(@RequestParam Map paramMap,
-                       @RequestParam(name = "pageNo",required = false) Integer pageNo,
-                       @RequestParam(name = "pageSize", required = false) Integer pageSize){
-        log.info("hint this goods manage list method");
-        return "manage/goods/list";
-    }
-
-
-    @RequestMapping(value = "/create", method = {RequestMethod.GET})
-    public String create(){
-        log.info("hint this goods create get method");
-        return "manager/goods/create";
-    }
-
-    @RequestMapping(value = "/create", method = {RequestMethod.POST})
-    public String handleAdd(Goods goods){
-        log.info("hint this goods create Post method");
-        return "manager/goods/create";
-    }
-
     @RequestMapping(value = "/{id}/info",
             method = {RequestMethod.GET, RequestMethod.POST})
     public String goodsDetail(@PathVariable String id,
