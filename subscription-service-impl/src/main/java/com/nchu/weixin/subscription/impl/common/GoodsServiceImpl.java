@@ -6,8 +6,12 @@ import com.nchu.weixin.subscription.enums.OperateEnum;
 import com.nchu.weixin.subscription.repo.common.GoodsRepo;
 import com.nchu.weixin.subscription.service.common.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.annotation.Id;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 商品服务实现类
@@ -38,5 +42,16 @@ public class GoodsServiceImpl implements GoodsService {
 
     public void delete(String id) {
         this.goodsRepo.delete(id);
+    }
+
+    @Override
+    public Map searcher(Map paramMap, Pageable pageRequest) {
+        Map retMap = new HashMap();
+        Page<Goods> pages = this.goodsRepo.findAll(pageRequest);
+
+        retMap.put("pages", pages);
+        retMap.put("gds", pages.getContent());
+
+        return retMap;
     }
 }

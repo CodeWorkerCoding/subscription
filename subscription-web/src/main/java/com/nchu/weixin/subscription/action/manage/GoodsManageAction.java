@@ -7,6 +7,8 @@ import com.nchu.weixin.subscription.service.common.GoodsService;
 import com.nchu.weixin.subscription.tools.StringHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,6 +27,9 @@ import java.util.Map;
 @Slf4j
 public class GoodsManageAction {
 
+    private static final Integer PAGE_MIN = 1;
+    private static final Integer PAGE_MAX = 20;
+
     @Autowired
     GoodsService goodsService;
 
@@ -32,8 +37,15 @@ public class GoodsManageAction {
             method = {RequestMethod.GET})
     public String manageList(@RequestParam Map paramMap,
                              @RequestParam(name = "pageNo",required = false) Integer pageNo,
-                             @RequestParam(name = "pageSize", required = false) Integer pageSize){
+                             @RequestParam(name = "pageSize", required = false) Integer pageSize,
+                             Map model){
         log.info("hint this goods manage list method");
+        Map retMap = this.goodsService.searcher(paramMap,
+                new PageRequest(pageNo < PAGE_MIN ? 0 : pageNo -1 ,
+                        pageSize > PAGE_MAX ? PAGE_MAX : pageSize ,
+                        new Sort(Sort.Direction.DESC, "createdTime")));
+        model.putAll(retMap);
+        model.putAll(paramMap);
         return "manage/goods/list";
     }
 
