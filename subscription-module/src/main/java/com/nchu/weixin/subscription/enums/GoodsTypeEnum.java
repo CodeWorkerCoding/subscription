@@ -13,7 +13,7 @@ public enum GoodsTypeEnum {
 
     private String desc;
 
-    GoodsTypeEnum(String desc, String value) {
+    GoodsTypeEnum(String value, String desc) {
         this.desc = desc;
         this.value = value;
     }

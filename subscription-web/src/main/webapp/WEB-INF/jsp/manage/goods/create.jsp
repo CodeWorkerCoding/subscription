@@ -42,7 +42,7 @@
                     <div class="col-sm-4 col-md-3 text-left">
                         <select class="form-control" id="goodsType" name="goodsType">
                             <option value="">--指定商品类型--</option>
-                            <c:forEach items="${GoodsStatusEnum.valus()}" var="gtp">
+                            <c:forEach items="${GoodsTypeEnum.values()}" var="gtp">
                                 <option value="${gtp.value}" <c:if test="${gs.goodsType == gtp}">selected</c:if>>${gtp.desc}</option>
                             </c:forEach>
                         </select>
