@@ -6,6 +6,7 @@ package com.nchu.weixin.subscription.enums;
  */
 public enum GoodsTypeEnum {
     PIZZA("PIZZA", "披萨"),
+    CAKE("CAKE", "蛋糕"),
     ;
 
     private String value;

@@ -1,6 +1,7 @@
 package com.nchu.weixin.subscription.action;
 
 import com.nchu.weixin.subscription.domain.component.UserContext;
+import com.nchu.weixin.subscription.utils.UserUtil;
 import org.hibernate.annotations.common.util.StringHelper;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -41,8 +42,7 @@ public class LoginAction {
     @RequestMapping(value = { "/" }, method = { RequestMethod.GET })
     public String login(HttpServletRequest request, Model model) throws Exception {
         /*java 代码实现security获取当前用户*/
-        UserDetails user = (UserDetails) SecurityContextHolder.getContext()
-                .getAuthentication().getPrincipal();
+        UserDetails user = UserUtil.getUserDetails();
         UserContext.setUserName(user.getUsername());
         model.addAttribute("cus", user.getUsername());
         return "main";

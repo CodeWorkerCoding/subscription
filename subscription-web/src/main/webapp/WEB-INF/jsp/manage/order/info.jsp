@@ -8,10 +8,19 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>商品详情</title>
+    <title>订单详情</title>
     <%@include file="../../common/include.jsp"%>
 </head>
 <body>
-
+    <div class="container-fluid">
+        <div class="page-header">
+            <h1>xxx</h1>
+        </div>
+        <div class="pager">
+            <div>
+                sssssss
+            </div>
+        </div>
+    </div>
 </body>
 </html>

@@ -6,19 +6,21 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.nchu.weixin.subscription.enums.GoodsStatusEnum" %>
 <%@ page import="com.nchu.weixin.subscription.enums.GoodsTypeEnum" %>
 <html>
 <head>
-    <title>添加一个商品</title>
+    <title>更新一个商品</title>
     <%@include file="../../common/include.jsp"%>
 </head>
 <body>
     <div class="container-fluid">
         <div class="page-header">
-            <h1>添加一个商品信息</h1>
+            <h1>更新一个商品信息</h1>
         </div>
         <div class="pager">
             <form class="form-horizontal" role="form">
+                <input type="hidden" name="id" value="${gs.id}">
                 <div class="form-group">
                     <div class="col-sm-3 col-md-2 text-right">
                         <label class="control-label" for="goodsName">商品名</label>
@@ -44,6 +46,19 @@
                             <option value="">--指定商品类型--</option>
                             <c:forEach items="${GoodsStatusEnum.valus()}" var="gtp">
                                 <option value="${gtp.value}" <c:if test="${gs.goodsType == gtp}">selected</c:if>>${gtp.desc}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-3 col-md-2 text-right">
+                        <label class="control-label" for="status">商品状态</label>
+                    </div>
+                    <div class="col-sm-4 col-md-3 text-left">
+                        <select class="form-control" id="status" name="status">
+                            <option value="">--指定商品状态--</option>
+                            <c:forEach items="${GoodsStatusEnum.valus()}" var="gst">
+                                <option value="${gst.value}" <c:if test="${gs.status == gst}">selected</c:if>>${gst.desc}</option>
                             </c:forEach>
                         </select>
                     </div>

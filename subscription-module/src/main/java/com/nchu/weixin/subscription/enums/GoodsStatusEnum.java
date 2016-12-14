@@ -5,7 +5,10 @@ package com.nchu.weixin.subscription.enums;
  * Created by fujianjian on 2016/12/10.
  */
 public enum GoodsStatusEnum {
-
+    WAIT_SHELVE("WAIT_SHELVE", "待上架"),
+    IN_SALE("IN_SALE", "正在销售"),
+    REBACK("REBACK", "召回"),
+    UN_SHELVE("UN_SHELVE", "已下架")
     ;
 
     private String value;

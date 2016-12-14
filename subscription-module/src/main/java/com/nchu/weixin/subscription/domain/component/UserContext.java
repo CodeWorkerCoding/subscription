@@ -4,6 +4,8 @@ package com.nchu.weixin.subscription.domain.component;
  * 用户容器
  * Created by fujianjian on 2016/12/13.
  */
+/*add at 2016-12-14 discard this class*/
+@Deprecated
 public class UserContext {
 
     private static ThreadLocal<String> local=new ThreadLocal<String>();

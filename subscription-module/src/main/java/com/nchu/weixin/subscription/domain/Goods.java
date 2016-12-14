@@ -1,6 +1,7 @@
 package com.nchu.weixin.subscription.domain;
 
 import com.nchu.weixin.subscription.enums.GoodsStatusEnum;
+import com.nchu.weixin.subscription.enums.GoodsTypeEnum;
 import com.nchu.weixin.subscription.tools.UUidUtil;
 import lombok.Getter;
 import lombok.Setter;
@@ -44,6 +45,12 @@ public class Goods implements Serializable {
 
     @Getter
     @Setter
+    @Enumerated(EnumType.STRING)
+    private GoodsTypeEnum goodsType;
+
+    @Getter
+    @Setter
+    @Enumerated(EnumType.STRING)
     private GoodsStatusEnum status;
 
     @Getter

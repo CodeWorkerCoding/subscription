@@ -8,6 +8,9 @@ public enum OperateEnum {
     ADD("ADD", "添加操作"),
     MODIFY("MODIFY", "更新操作"),
     DEL("DEL", "删除操作"),
+    RELEASE("RELEASE", "上架"),
+    REBACK("REBACK", "召回"),
+    UNSHELVE("UNSHELVE", "下架"),
 
     ;
     private String value;

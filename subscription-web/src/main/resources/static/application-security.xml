@@ -22,6 +22,9 @@
         <sec:intercept-url pattern="/favicon.ico" access="permitAll" />
         <sec:intercept-url pattern="/manage/**" access="hasRole('ROLE_ADMIN')" />
         <sec:intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')" />
+        <sec:headers>
+            <sec:frame-options policy="SAMEORIGIN"/>
+        </sec:headers>
         <!--<sec:intercept-url pattern="/**" access="hasRole('ROLE_USER')" />-->
         <!--<sec:access-denied-handler ref="accessDeniedHandler"/>-->
     </sec:http>
