@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -55,8 +56,13 @@ public class GoodsManageAction {
         return "manage/goods/create";
     }
 
+    /**
+     * 创建一个商品信息
+     * @param goods
+     * @return
+     */
     @RequestMapping(value = "/create", method = {RequestMethod.POST})
-    public String handleAdd(Goods goods){
+    public String handleAdd(@RequestParam MultipartFile iconImg, Goods goods){
         goods.setStatus(GoodsStatusEnum.WAIT_SHELVE);
         goodsService.create(goods);
         return "redirect:manage/goods/list";
