@@ -2,7 +2,9 @@ package com.nchu.weixin.subscription.service.common;
 
 import com.nchu.weixin.subscription.domain.Goods;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.Map;
 
 /**
@@ -11,5 +13,11 @@ import java.util.Map;
  */
 public interface GoodsService extends BaseService<Goods, String> {
 
-    Map searcher(Map paramMap, Pageable pageRequest);
+    /**
+     * 带图表的添加一个商品
+     * @param object
+     * @param iconImg
+     * @return
+     */
+    Goods create(Goods object, MultipartFile iconImg) throws Exception;
 }

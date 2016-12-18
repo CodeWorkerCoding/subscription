@@ -1,5 +1,6 @@
 package com.nchu.weixin.subscription.domain;
 
+import com.nchu.weixin.subscription.enums.ImageSubjectEnum;
 import com.nchu.weixin.subscription.tools.UUidUtil;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,6 +36,10 @@ public class GoodsImages implements Serializable {
 
     @Setter
     @Getter
+    private ImageSubjectEnum subject;
+
+    @Setter
+    @Getter
     private Date createdTime;
 
     @PrePersist
@@ -42,5 +47,4 @@ public class GoodsImages implements Serializable {
         this.id = UUidUtil.getUUid();
         this.createdTime = new Date();
     }
-
 }

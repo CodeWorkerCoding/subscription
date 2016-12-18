@@ -10,12 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,8 +35,8 @@ public class GoodsManageAction {
     @RequestMapping(value = "/list",
             method = {RequestMethod.GET})
     public String manageList(@RequestParam Map paramMap,
-                             @RequestParam(name = "pageNo",required = false) Integer pageNo,
-                             @RequestParam(name = "pageSize", required = false) Integer pageSize,
+                             @RequestParam(name = "pageNo", defaultValue = "1", required = false) Integer pageNo,
+                             @RequestParam(name = "pageSize",defaultValue = "20", required = false) Integer pageSize,
                              Map model){
         log.info("hint this goods manage list method");
         Map retMap = this.goodsService.searcher(paramMap,
@@ -56,15 +54,30 @@ public class GoodsManageAction {
         return "manage/goods/create";
     }
 
+    @RequestMapping(value = "/{id}/info", method = {RequestMethod.GET})
+    public String getGoodsInfo(@PathVariable String id, Map model){
+        Goods goods = this.goodsService.get(id);
+        model.put("gs", goods);
+        return "manage/goods/info";
+    }
+
+    @RequestMapping(value = "/{id}/modify", method = {RequestMethod.GET})
+    public String modifyGoodsInfo(@PathVariable String id, Map model){
+        Goods goods = this.goodsService.get(id);
+        model.put("gs", goods);
+        return "manage/goods/modify";
+    }
+
+
+
     /**
      * 创建一个商品信息
      * @param goods
      * @return
      */
-    @RequestMapping(value = "/create", method = {RequestMethod.POST})
-    public String handleAdd(@RequestParam MultipartFile iconImg, Goods goods){
-        goods.setStatus(GoodsStatusEnum.WAIT_SHELVE);
-        goodsService.create(goods);
+    @RequestMapping(value = "/create", method = { RequestMethod.POST })
+    public String handleAdd(@RequestParam MultipartFile iconImg, Goods goods) throws Exception {
+        goodsService.create(goods, iconImg);
         return "redirect:manage/goods/list";
     }
 

@@ -18,13 +18,13 @@
             <h1>添加一个商品信息</h1>
         </div>
         <div class="pager">
-            <form class="form-horizontal" role="form">
+            <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <div class="col-sm-3 col-md-2 text-right">
                         <label class="control-label" for="goodsName">商品名</label>
                     </div>
                     <div class="col-sm-4 col-md-3 text-left">
-                        <input type="text" class="form-control" id="goodsName" name="goodsName" placeholder="商品名" value="${gs.goodsName}">
+                        <input type="text" class="form-control" required id="goodsName" name="goodsName" placeholder="商品名" value="${gs.goodsName}">
                     </div>
                 </div>
                 <div class="form-group">
@@ -32,7 +32,8 @@
                         <label class="control-label" for="goodsPrice">商品价格</label>
                     </div>
                     <div class="col-sm-4 col-md-3 text-left">
-                        <input type="number" class="form-control" id="goodsPrice" name="goodsName" placeholder="商品价格" value="${gs.goodsPrice}">
+                        <input type="text" class="form-control" required id="goodsPrice" name="goodsPrice" placeholder="商品价格" value="${gs.goodsPrice}">
+                        <%--<span class="input-group-addon col-sm-1 col-md-1">元</span>--%>
                     </div>
                 </div>
                 <div class="form-group">
@@ -40,7 +41,7 @@
                         <label class="control-label" for="goodsType">商品类型</label>
                     </div>
                     <div class="col-sm-4 col-md-3 text-left">
-                        <select class="form-control" id="goodsType" name="goodsType">
+                        <select class="form-control" id="goodsType" name="goodsType" required>
                             <option value="">--指定商品类型--</option>
                             <c:forEach items="${GoodsTypeEnum.values()}" var="gtp">
                                 <option value="${gtp.value}" <c:if test="${gs.goodsType == gtp}">selected</c:if>>${gtp.desc}</option>
@@ -62,14 +63,15 @@
                         <label class="control-label" for="goodMainImg">商品主图片</label>
                     </div>
                     <div class="col-sm-4 col-md-3 text-left">
-                        <input type="file" class="form-control" id="goodMainImg" name="goodMainImg" placeholder="商品图片">
+                        <input type="file" class="form-control" id="goodMainImg" required name="iconImg" placeholder="商品图片">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-4 col-sm-offset-3 col-md-3 col-md-offset-2">
-                        <button type="reset" class="btn btn-danger">清除所有</button>
+                        <%--<button type="reset" class="btn btn-danger _confirm" data-confirm="确定清除所有信息？">清除所有</button>--%>
+                        <button type="reset" class="btn btn-danger" onclick="javascript:confirm('确定清除所有信息？')">清除所有</button>
                         <button type="submit" class="btn btn-primary">添加</button>
-                        <a href="javascript:void(0);" class="btn btn-default">返回</a>
+                        <a href="javascript:void(0);" class="btn btn-default" onclick="javascript:history.back(-1)">返回</a>
                     </div>
                 </div>
             </form>

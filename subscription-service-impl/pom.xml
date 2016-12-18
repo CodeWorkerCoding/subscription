@@ -15,6 +15,20 @@
     </parent>
 
     <dependencies>
+
+        <!--quartz dependencies-->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>2.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz-jobs</artifactId>
+            <version>2.2.2</version>
+        </dependency>
+        <!--end-->
+
         <!-- 本工程的项目依赖-->
         <dependency>
             <groupId>com.nchu.weixin.subscription</groupId>

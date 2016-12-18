@@ -5,7 +5,10 @@ import com.nchu.weixin.subscription.enums.MailTypeEnum;
 import com.nchu.weixin.subscription.enums.OperateEnum;
 import com.nchu.weixin.subscription.service.common.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.Map;
 
 /**
  * Created by Alen on 2016/12/10.
@@ -31,5 +34,10 @@ public class OrderServiceImpl implements OrderService {
 
     public void delete(String s) {
 
+    }
+
+    @Override
+    public Map searcher(Map paramMap, Pageable pageRequest) {
+        return null;
     }
 }

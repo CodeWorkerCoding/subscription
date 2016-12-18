@@ -25,6 +25,10 @@ public class Goods implements Serializable {
 
     @Getter
     @Setter
+    private String goodsNo;
+
+    @Getter
+    @Setter
     private String goodsName;
 
     @Getter
