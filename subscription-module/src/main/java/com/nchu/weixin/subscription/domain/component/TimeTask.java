@@ -40,7 +40,7 @@ public class TimeTask implements Serializable {
     @Getter
     @Setter
     @Enumerated(EnumType.STRING)
-    private TimeTaskConditionEnum condition;
+    private TimeTaskConditionEnum taskCondition;
     @Getter
     @Setter
     private Date createdTime;

@@ -51,13 +51,15 @@ public class ScheduleContext {
             Map param = new HashMap();
             param.put("status", TimeTaskStatusEnum.ENABLE);
             List<TimeTask> taskList = timeTaskService.searcher(param);
-            taskList.forEach(task -> {
-                if (task.getCondition() == null || task.getCondition() == TimeTaskConditionEnum.EXECUTING){
-                    task.setCondition(TimeTaskConditionEnum.INIT);
-                    timeTaskService.modify(task);
-                }
-                register(task);
-            });
+            if (taskList != null && taskList.size() > 0){
+                taskList.forEach(task -> {
+                    if (task.getTaskCondition() == null || task.getTaskCondition() == TimeTaskConditionEnum.EXECUTING){
+                        task.setTaskCondition(TimeTaskConditionEnum.INIT);
+                        timeTaskService.modify(task);
+                    }
+                    register(task);
+                });
+            }
         }
 
 

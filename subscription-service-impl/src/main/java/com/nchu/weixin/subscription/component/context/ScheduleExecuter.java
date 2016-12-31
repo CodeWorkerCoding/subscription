@@ -46,17 +46,17 @@ public class ScheduleExecuter implements Job {
 
         TimeTaskService taskService = (TimeTaskService) context.getMergedJobDataMap().get("timePlanService");
 
-        if (TimeTaskConditionEnum.EXECUTING != task.getCondition()){
+        if (TimeTaskConditionEnum.EXECUTING != task.getTaskCondition()){
             try {
                 RootScheduleService rootScheduleService = (RootScheduleService) context.getMergedJobDataMap().get("rootScheduleService");
-                task.setCondition(TimeTaskConditionEnum.EXECUTING);
+                task.setTaskCondition(TimeTaskConditionEnum.EXECUTING);
                 taskService.modify(task);
                 rootScheduleService.execute();
-                task.setCondition(TimeTaskConditionEnum.COMPLETED);
+                task.setTaskCondition(TimeTaskConditionEnum.COMPLETED);
                 taskService.modify(task);
             } catch (Exception e){
                 log.error("任务【{}】执行异常", task.getTaskName(), e);
-                task.setCondition(TimeTaskConditionEnum.EXCEPTION);
+                task.setTaskCondition(TimeTaskConditionEnum.EXCEPTION);
                 taskService.modify(task);
             }
         }
