@@ -56,6 +56,20 @@ public class CommonTest {
         System.out.println(firstBook.name);
         System.out.println(secondBook.name);
     }
+    @Test
+    public void testBaseTypePass(){
+        int a =  new Integer(1);
+        int b = new Integer(1);
+        System.out.println(a==b);
+
+        String stra = new String("hello");
+        String strb = new String("hello");
+
+        System.out.println(stra == strb);
+
+        strb = stra;
+        System.out.println(stra == strb);
+    }
 
     /***
      * summary
