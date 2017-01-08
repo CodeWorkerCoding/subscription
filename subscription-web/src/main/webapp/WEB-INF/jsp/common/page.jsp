@@ -28,12 +28,12 @@
         </c:if>
         <c:if test="${pages.totalPages <= 5 || pages.number+6 > pages.totalPages }">
             <c:forEach begin="${pages.number+1}" end="${pages.totalPages }" var="currPage">
-                <li><a href="javascript:gotoPage(${currPage-1 })">${currPage }</a></li>
+                <li <c:if test="${currPage eq pages.number+1}"> class="active" </c:if>><a href="javascript:gotoPage(${currPage-1 })">${currPage }</a></li>
             </c:forEach>
         </c:if>
         <c:if test="${pages.totalPages > 5 && pages.number+6<=pages.totalPages }">
             <c:forEach begin="${pages.number+1}" end="${pages.number+5}" var="currPage">
-                <li><a href="javascript:gotoPage(${currPage-1 })">${currPage }</a></li>
+                <li <c:if test="${currPage eq pages.number+1}"> class="active" </c:if>><a href="javascript:gotoPage(${currPage-1 })">${currPage }</a></li>
             </c:forEach>
         </c:if>
         <c:if test="${pages.number+1 < pages.totalPages  }">

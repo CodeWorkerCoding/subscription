@@ -17,8 +17,8 @@
     <form class="form-inline" name="searchForm" method="post", role="form">
         <div class="row">
             <div class="form-group">
-                <label class="control-label" for="goodsName"></label>
-                <input type="text" class="form-control" id="goodsName" value="${goodsName}">
+                <label class="control-label" for="id">订单编号</label>
+                <input type="text" class="form-control" id="id" value="${id}">
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">查询</button>
@@ -41,18 +41,23 @@
             </tr>
             </thead>
             <tbody>
-            <td>${ord.id}</td>
-            <td>${ord.custId}</td>
-            <td>${ord.orderCost}</td>
-            <td>${ord.goodsCount}</td>
-            <td>${ord.status.desc}</td>
-            <td>${ord.createdTime}</td>
-            <td>
-                <a href="${ctx}/#" class="btn btn-primary">修改</a>
-                <a href="${ctx}/#" class="btn btn-danger">删除</a>
-            </td>
+                <c:forEach items="${ords}" var="ord">
+                    <tr>
+                        <td>${ord.id}</td>
+                        <td>${ord.custId}</td>
+                        <td>${ord.orderCost}</td>
+                        <td>${ord.goodsCount}</td>
+                        <td>${ord.status.desc}</td>
+                        <td>${ord.createdTime}</td>
+                        <td>
+                            <a href="${ctx}/#" class="btn btn-primary">修改</a>
+                            <a href="${ctx}/#" class="btn btn-danger">删除</a>
+                        </td>
+                    </tr>
+                </c:forEach>
             </tbody>
         </table>
+        <%@include file="../../common/page.jsp" %>
     </div>
 </div>
 </body>

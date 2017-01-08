@@ -57,7 +57,7 @@
                     <div class="col-sm-4 col-md-3 text-left">
                         <select class="form-control" id="status" name="status">
                             <option value="">--指定商品状态--</option>
-                            <c:forEach items="${GoodsStatusEnum.valus()}" var="gst">
+                            <c:forEach items="${GoodsStatusEnum.values()}" var="gst">
                                 <option value="${gst.value}" <c:if test="${gs.status == gst}">selected</c:if>>${gst.desc}</option>
                             </c:forEach>
                         </select>
@@ -68,8 +68,8 @@
                         <label class="control-label" for="goodsDesc">商品描述</label>
                     </div>
                     <div class="col-sm-4 col-md-3 text-left">
-                        <textarea class="form-control" placeholder="商品描述" id="goodsDesc" name="goodsDesc" value="${gs.desc}"></textarea>
-                        <%--<input type="" class="form-control" id="goodsDesc" name="goodsDesc" placeholder="商品名">--%>
+                        <textarea class="form-control" placeholder="商品描述" id="goodsDesc" name="goodsDesc"
+                                  style="margin: 0px -65px 0px 0px; width: 396px; height: 188px;">"${gs.goodsDesc}"</textarea>
                     </div>
                 </div>
                 <div class="form-group">
@@ -83,8 +83,8 @@
                 <div class="form-group">
                     <div class="col-sm-4 col-sm-offset-3 col-md-3 col-md-offset-2">
                         <button type="reset" class="btn btn-danger">清除所有</button>
-                        <button type="submit" class="btn btn-primary">添加</button>
-                        <a href="javascript:void(0);" class="btn btn-default">返回</a>
+                        <button type="submit" class="btn btn-primary">修改</button>
+                        <a href="javascript:history.back(-1);" class="btn btn-default">返回</a>
                     </div>
                 </div>
             </form>

@@ -23,7 +23,7 @@
 <body>
 <div class="container-fluid">
     <h1 class="page-header">商品列表</h1>
-    <form name="searchForm" id="searchForm" role="form" action="" method="post">
+    <form name="searchForm" id="searchForm" role="form" method="post">
         <div class="form-inline">
             <div class="row">
                 <div class="form-group">
@@ -79,7 +79,7 @@
                 </c:forEach>
                 </tbody>
             </table>
-            <%@ include file="../../common/page.jsp "%>
+            <%@include file="../../common/page.jsp" %>
         </div>
     </form>
 </div>

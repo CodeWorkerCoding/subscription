@@ -1,12 +1,15 @@
 package com.nchu.weixin.subscription.impl.common;
 
 import com.nchu.weixin.subscription.domain.component.TimeTask;
+import com.nchu.weixin.subscription.enums.component.TimeTaskConditionEnum;
 import com.nchu.weixin.subscription.repo.common.TimeTaskRepo;
 import com.nchu.weixin.subscription.service.common.TimeTaskService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,27 +25,34 @@ public class TimeTaskServiceImpl implements TimeTaskService {
 
     @Override
     public TimeTask get(Integer integer) {
-        return null;
+        return timeTaskRepo.getOne(integer);
     }
 
     @Override
     public TimeTask create(TimeTask object) {
-        return null;
+        object.setTaskCondition(TimeTaskConditionEnum.INIT);
+        return timeTaskRepo.save(object);
     }
 
     @Override
     public TimeTask modify(TimeTask object) {
-        return null;
+        return timeTaskRepo.saveAndFlush(object);
     }
 
     @Override
     public void delete(Integer integer) {
-
+        timeTaskRepo.delete(integer);
     }
 
     @Override
     public Map searcher(Map paramMap, Pageable pageRequest) {
-        return null;
+        Map retMap = new HashMap();
+        Page<TimeTask> pages = this.timeTaskRepo.findAll(pageRequest);
+
+        retMap.put("pages", pages);
+        retMap.put("tts", pages.getContent());
+
+        return retMap;
     }
 
     /**

@@ -38,6 +38,11 @@
             <li><a href="${ctx}/manage/order/list" target="mainFrame">订单列表</a></li>
         </ul>
     </li>
+    <li><a href="#">系统管理</a>
+        <ul>
+            <li><a href="${ctx}/manage/task/list" target="mainFrame">任务列表</a></li>
+        </ul>
+    </li>
 
 	<%--
     <li><a href="#">产品管理</a>

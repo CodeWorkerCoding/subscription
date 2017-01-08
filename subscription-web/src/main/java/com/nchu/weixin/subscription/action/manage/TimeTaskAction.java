@@ -1,5 +1,6 @@
 package com.nchu.weixin.subscription.action.manage;
 
+import com.nchu.weixin.subscription.domain.component.TimeTask;
 import com.nchu.weixin.subscription.service.common.TimeTaskService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class TimeTaskAction {
     TimeTaskService  timeTaskService;
 
     @RequestMapping(value = "/list",
-            method = {RequestMethod.GET})
+            method = {RequestMethod.GET, RequestMethod.POST})
     public String manageList(@RequestParam Map paramMap,
                              @RequestParam(name = "pageNo", defaultValue = "1", required = false) Integer pageNo,
                              @RequestParam(name = "pageSize",defaultValue = "20", required = false) Integer pageSize,
@@ -43,4 +44,14 @@ public class TimeTaskAction {
         return "manage/task/list";
     }
 
+    @RequestMapping(value = "/create",method = RequestMethod.GET)
+    public String createTaskPage(){
+        return "manage/task/create";
+    }
+
+    @RequestMapping(value = "/create",method = RequestMethod.POST)
+    public String createTask(TimeTask timeTask){
+        timeTaskService.create(timeTask);
+        return "redirect:/manage/task/list";
+    }
 }

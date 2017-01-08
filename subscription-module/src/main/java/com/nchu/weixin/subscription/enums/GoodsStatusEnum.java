@@ -15,7 +15,7 @@ public enum GoodsStatusEnum {
 
     private String desc;
 
-    GoodsStatusEnum(String desc, String value) {
+    GoodsStatusEnum(String value, String desc) {
         this.desc = desc;
         this.value = value;
     }

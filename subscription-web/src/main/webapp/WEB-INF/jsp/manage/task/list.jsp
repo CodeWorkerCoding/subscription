@@ -34,7 +34,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label class="control-label text-right" for="condition">状态:</label>
+                        <label class="control-label text-right" for="condition">执行状态:</label>
                         <select class="form-control" id="condition" name="condition">
                             <option value="">--请选择状态--</option>
                             <c:forEach items="${TimeTaskConditionEnum.values()}" var="ttc">
@@ -44,11 +44,12 @@
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">查询</button>
-                        <a href="${ctx}/manage/goods/create" class="btn btn-success">创建系统任务</a>
+                        <a href="${ctx}/manage/task/create" class="btn btn-success">创建系统任务</a>
                     </div>
                 </div>
             </div>
             <h2></h2>
+            <hr>
             <div class="table-responsive">
                 <table class="table table-bordered table-hover">
                     <thead>
@@ -59,7 +60,6 @@
                         <th>执行器</th>
                         <th>状态</th>
                         <th>执行状态</th>
-                        <th>状态</th>
                         <th>创建时间</th>
                         <th>跟新时间</th>
                         <th>操作</th>
@@ -72,26 +72,32 @@
                         <td>${tt.cronRule}</td>
                         <td>${tt.executeContext}</td>
                         <td>${tt.status.desc}</td>
-                        <td>${tt.condition.desc}</td>
+                        <td>${tt.taskCondition.desc}</td>
+                        <%--<td>${tt.createdTime}</td>--%>
                         <td><fmt:formatDate value="${tt.createdTime}" pattern="yyyy-MM-dd"/></td>
                         <td><fmt:formatDate value="${tt.modifiedTime}" pattern="yyyy-MM-dd"/> </td>
                         <td>
                             <a href="${ctx}/manage/goods/${tt.id}/modify" class="btn btn-primary">修改</a>
-                            <button class="btn btn-primary"
-                                    onclick="sendOperate(${tt.id}, ${OperateEnum.RELEASE.value}})">${OperateEnum.RELEASE.desc}</button>
-                            <button class="btn btn-primary"
-                                    onclick="sendOperate(${tt.id}, ${OperateEnum.REBACK.value}})">${OperateEnum.REBACK.desc}</button>
-                            <button class="btn btn-primary"
-                                    onclick="sendOperate(${tt.id}, ${OperateEnum.UNSHELVE.value}})">${OperateEnum.UNSHELVE.desc}</button>
+                            <c:if test="${tt.status == TimeTaskStatusEnum.ENABLE}">
+                                <button class="btn btn-primary" type="button" onclick="operateTask('disable');">${TimeTaskStatusEnum.DISABLE.desc}</button>
+                            </c:if>
+                            <c:if test="${tt.status == TimeTaskStatusEnum.DISABLE}">
+                                <button class="btn btn-primary" type="button" onclick="operateTask('enable');">${TimeTaskStatusEnum.ENABLE.desc}</button>
+                            </c:if>
+                            <button class="btn btn-primary" onclick="operateTask('execute');">执行一次</button>
                             <a href="${ctx}/#" class="btn btn-danger">删除</a>
                         </td>
                     </c:forEach>
                     </tbody>
                 </table>
-                <%@ include file="../../common/page.jsp "%>
+                <%@include file="../../common/page.jsp" %>
             </div>
         </form>
     </div>
-
+    <script type="text/javascript">
+        function operateTask(opType) {
+            // 待实现
+        }
+    </script>
 </body>
 </html>

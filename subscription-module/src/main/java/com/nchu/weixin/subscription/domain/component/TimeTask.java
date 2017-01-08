@@ -41,6 +41,11 @@ public class TimeTask implements Serializable {
     @Setter
     @Enumerated(EnumType.STRING)
     private TimeTaskConditionEnum taskCondition;
+
+    /*任务描述*/
+    @Getter
+    @Setter
+    private String taskDesc;
     @Getter
     @Setter
     private Date createdTime;

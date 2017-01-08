@@ -13,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,7 +32,7 @@ public class GoodsManageAction {
     GoodsService goodsService;
 
     @RequestMapping(value = "/list",
-            method = {RequestMethod.GET})
+            method = {RequestMethod.GET, RequestMethod.POST})
     public String manageList(@RequestParam Map paramMap,
                              @RequestParam(name = "pageNo", defaultValue = "1", required = false) Integer pageNo,
                              @RequestParam(name = "pageSize",defaultValue = "20", required = false) Integer pageSize,
@@ -68,8 +67,6 @@ public class GoodsManageAction {
         return "manage/goods/modify";
     }
 
-
-
     /**
      * 创建一个商品信息
      * @param goods
@@ -78,7 +75,7 @@ public class GoodsManageAction {
     @RequestMapping(value = "/create", method = { RequestMethod.POST })
     public String handleAdd(@RequestParam MultipartFile iconImg, Goods goods) throws Exception {
         goodsService.create(goods, iconImg);
-        return "redirect:manage/goods/list";
+        return "redirect:/manage/goods/list";
     }
 
     @RequestMapping(value = "/operate", method = {RequestMethod.GET})
