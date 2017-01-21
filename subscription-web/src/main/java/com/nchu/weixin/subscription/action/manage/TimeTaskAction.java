@@ -1,15 +1,21 @@
 package com.nchu.weixin.subscription.action.manage;
 
+import com.nchu.weixin.subscription.component.RootScheduleService;
+import com.nchu.weixin.subscription.component.context.ScheduleContext;
 import com.nchu.weixin.subscription.domain.component.TimeTask;
+import com.nchu.weixin.subscription.enums.component.TimeTaskConditionEnum;
+import com.nchu.weixin.subscription.enums.component.TimeTaskStatusEnum;
 import com.nchu.weixin.subscription.service.common.TimeTaskService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Map;
 
@@ -25,8 +31,15 @@ public class TimeTaskAction {
     private static final Integer PAGE_MIN = 1;
     private static final Integer PAGE_MAX = 20;
 
+    /*定时器上下文*/
     @Autowired
-    TimeTaskService  timeTaskService;
+    private ScheduleContext scheduleContext;
+
+    @Autowired
+    private ApplicationContext applicationContext;
+
+    @Autowired
+    private TimeTaskService timeTaskService;
 
     @RequestMapping(value = "/list",
             method = {RequestMethod.GET, RequestMethod.POST})
@@ -54,4 +67,66 @@ public class TimeTaskAction {
         timeTaskService.create(timeTask);
         return "redirect:/manage/task/list";
     }
+
+    /**
+     * 开通一个定时任务
+     * @param taskId
+     * @return
+     */
+    @RequestMapping(value = "/enable", method = RequestMethod.GET)
+    public String enable(@RequestParam Integer taskId){
+        TimeTask tt = this.timeTaskService.get(taskId);
+        scheduleContext.unRegister(tt);
+        tt.setStatus(TimeTaskStatusEnum.ENABLE);
+        this.timeTaskService.modify(tt);
+        this.scheduleContext.register(tt);
+        return "redirect:/manage/task/list";
+    }
+
+    /**
+     * 关闭一个定时任务
+     * @param taskId
+     * @return
+     */
+    @RequestMapping(value = "/disable", method = RequestMethod.GET)
+    public String disable(@RequestParam Integer taskId){
+        TimeTask tt = this.timeTaskService.get(taskId);
+        scheduleContext.unRegister(tt);
+        tt.setStatus(TimeTaskStatusEnum.DISABLE);
+        this.timeTaskService.modify(tt);
+        return "redirect:/manage/task/list";
+    }
+
+    /***
+     * 执行一次定时任务
+     * @param taskId
+     * @return
+     */
+    public @ResponseBody String execute(@RequestParam Integer taskId){
+        TimeTask tt = this.timeTaskService.get(taskId);
+        if (tt != null && tt.getTaskCondition() == TimeTaskConditionEnum.INIT){
+            tt.setTaskCondition(TimeTaskConditionEnum.PREPARE);
+            timeTaskService.modify(tt);
+            RootScheduleService service = (RootScheduleService) this.applicationContext.getBean(tt.getExecuteContext());
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        tt.setTaskCondition(TimeTaskConditionEnum.EXECUTING);
+                        timeTaskService.modify(tt);
+                        service.execute();
+                        tt.setTaskCondition(TimeTaskConditionEnum.COMPLETED);
+                        timeTaskService.modify(tt);
+                    } catch (Exception e){
+                        log.warn("【{}】定时任务执行异常, 异常信息：", tt.getExecuteContext(), e);
+                        tt.setTaskCondition(TimeTaskConditionEnum.EXCEPTION);
+                        timeTaskService.modify(tt);
+                    }
+                }
+            }).start();
+        }
+
+        return "";
+    }
+
 }

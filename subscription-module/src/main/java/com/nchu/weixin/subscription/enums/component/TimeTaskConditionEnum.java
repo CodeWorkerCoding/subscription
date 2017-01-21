@@ -10,6 +10,7 @@ import lombok.Setter;
 public enum TimeTaskConditionEnum {
 
     INIT("INIT", "初始"),
+    PREPARE("PREPARE", "准备执行...."),
     EXECUTING("EXECUTING", "执行中"),
     EXCEPTION("EXCEPTION", "执行异常"),
     COMPLETED("COMPLETED", "执行完成"),
