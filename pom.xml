@@ -27,6 +27,7 @@
         <module>subscription-utils</module>
         <module>subscription-web</module>
         <module>subscription-plugin</module>
+        <module>subscription-swing</module>
     </modules>
 
 
