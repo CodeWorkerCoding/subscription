@@ -44,7 +44,7 @@ public class ScheduleExecuter implements Job {
     public void execute(JobExecutionContext context) throws JobExecutionException {
         TimeTask task = (TimeTask) context.getMergedJobDataMap().get("module");
 
-        TimeTaskService taskService = (TimeTaskService) context.getMergedJobDataMap().get("timePlanService");
+        TimeTaskService taskService = (TimeTaskService) context.getMergedJobDataMap().get("timeTaskService");
 
         if (TimeTaskConditionEnum.EXECUTING != task.getTaskCondition()){
             try {

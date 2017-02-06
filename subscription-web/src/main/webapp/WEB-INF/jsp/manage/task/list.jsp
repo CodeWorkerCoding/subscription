@@ -77,14 +77,14 @@
                         <td><fmt:formatDate value="${tt.createdTime}" pattern="yyyy-MM-dd"/></td>
                         <td><fmt:formatDate value="${tt.modifiedTime}" pattern="yyyy-MM-dd"/> </td>
                         <td>
-                            <a href="${ctx}/manage/goods/${tt.id}/modify" class="btn btn-primary">修改</a>
+                            <a href="${ctx}/manage/task/${tt.id}/modify" class="btn btn-primary">修改</a>
                             <c:if test="${tt.status == TimeTaskStatusEnum.ENABLE}">
-                                <button class="btn btn-primary" type="button" onclick="operateTask('disable');">${TimeTaskStatusEnum.DISABLE.desc}</button>
+                                <a class="btn btn-primary" type="button" href="${ctx}/manage/task/disable?taskId=${tt.id}">${TimeTaskStatusEnum.DISABLE.desc}</a>
                             </c:if>
                             <c:if test="${tt.status == TimeTaskStatusEnum.DISABLE}">
-                                <button class="btn btn-primary" type="button" onclick="operateTask('enable');">${TimeTaskStatusEnum.ENABLE.desc}</button>
+                                <a class="btn btn-primary" type="button" href="${ctx}/manage/task/enable?taskId=${tt.id}">${TimeTaskStatusEnum.ENABLE.desc}</a>
                             </c:if>
-                            <button class="btn btn-primary" onclick="operateTask('execute');">执行一次</button>
+                            <button class="btn btn-primary" onclick="executeOnce('execute');">执行一次</button>
                             <a href="${ctx}/#" class="btn btn-danger">删除</a>
                         </td>
                     </c:forEach>
@@ -95,8 +95,8 @@
         </form>
     </div>
     <script type="text/javascript">
-        function operateTask(opType) {
-            // 待实现
+        function executeOnce() {
+
         }
     </script>
 </body>

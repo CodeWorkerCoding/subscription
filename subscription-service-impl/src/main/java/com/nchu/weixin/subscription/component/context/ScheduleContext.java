@@ -100,7 +100,7 @@ public class ScheduleContext {
 
     public void unRegister(TimeTask task){
         try {
-            String jobKey = "Job_" + task.getId();
+            String jobKey = "job_" + task.getId();
             JobDetail job = (JobDetail) historyJobKey.get(jobKey);
             if (job == null){
                 job = scheduler.getJobDetail(JobKey.jobKey(jobKey, SCHEDULE_GROUP));

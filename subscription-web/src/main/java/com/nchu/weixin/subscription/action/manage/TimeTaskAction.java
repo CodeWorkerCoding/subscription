@@ -12,11 +12,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -62,9 +60,22 @@ public class TimeTaskAction {
         return "manage/task/create";
     }
 
+    @RequestMapping(value = "/{taskId}/modify",method = RequestMethod.GET)
+    public String modifyTaskPage(@PathVariable Integer taskId, Map model){
+        TimeTask tt = this.timeTaskService.get(taskId);
+        model.put("ts",tt);
+        return "manage/task/create";
+    }
+
     @RequestMapping(value = "/create",method = RequestMethod.POST)
     public String createTask(TimeTask timeTask){
         timeTaskService.create(timeTask);
+        return "redirect:/manage/task/list";
+    }
+
+    @RequestMapping(value = "/modify",method = RequestMethod.POST)
+    public String modifyTask(TimeTask timeTask){
+        timeTaskService.modify(timeTask);
         return "redirect:/manage/task/list";
     }
 
@@ -102,7 +113,9 @@ public class TimeTaskAction {
      * @param taskId
      * @return
      */
-    public @ResponseBody String execute(@RequestParam Integer taskId){
+    @RequestMapping(value = "/execute", method = RequestMethod.GET)
+    public @ResponseBody Map execute(@RequestParam Integer taskId){
+        Map ret = new HashMap();
         TimeTask tt = this.timeTaskService.get(taskId);
         if (tt != null && tt.getTaskCondition() == TimeTaskConditionEnum.INIT){
             tt.setTaskCondition(TimeTaskConditionEnum.PREPARE);
@@ -124,9 +137,18 @@ public class TimeTaskAction {
                     }
                 }
             }).start();
+            ret.put("code", 401); // 准备执行
+            ret.put("msg", tt.getTaskCondition().getDesc());
+            return ret;
+        } else {
+            if (tt.getTaskCondition() == TimeTaskConditionEnum.COMPLETED) {
+                ret.put("code", 402); // 执行完成
+            } else if (tt.getTaskCondition() == TimeTaskConditionEnum.EXCEPTION) {
+                ret.put("code", 403); // 执行异常
+            }
+            ret.put("msg", tt.getTaskCondition().getDesc());
+            return ret;
         }
-
-        return "";
     }
 
 }
