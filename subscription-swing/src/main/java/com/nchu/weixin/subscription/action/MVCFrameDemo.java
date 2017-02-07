@@ -28,7 +28,7 @@ public class MVCFrameDemo extends JFrame implements ActionListener {
         textHeight = new JTextField(5);
         showArea = new JTextArea();
         controllButton = new JButton("计算面积");
-        clearButton = new JButton("清楚计算历史");
+        clearButton = new JButton("清除计算历史");
 
         JPanel northPanel = new JPanel();
         northPanel.add(new JLabel("上底："));

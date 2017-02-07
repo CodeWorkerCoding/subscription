@@ -89,13 +89,13 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<dependencies>
-					<!--spring 热部署-->
+				<!--<dependencies>
+					&lt;!&ndash;spring 热部署&ndash;&gt;
 					<dependency>
 						<groupId>org.springframework</groupId>
 						<artifactId>springloaded</artifactId>
 					</dependency>
-				</dependencies>
+				</dependencies>-->
 			</plugin>
 		</plugins>
 	</build>
