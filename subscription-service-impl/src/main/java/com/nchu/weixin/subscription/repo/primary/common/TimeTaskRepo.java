@@ -1,4 +1,4 @@
-package com.nchu.weixin.subscription.repo.common;
+package com.nchu.weixin.subscription.repo.primary.common;
 
 import com.nchu.weixin.subscription.domain.component.TimeTask;
 import org.springframework.data.jpa.repository.JpaRepository;

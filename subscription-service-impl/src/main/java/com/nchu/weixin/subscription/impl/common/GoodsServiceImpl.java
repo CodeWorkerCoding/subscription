@@ -2,9 +2,7 @@ package com.nchu.weixin.subscription.impl.common;
 
 import com.nchu.weixin.subscription.domain.Goods;
 import com.nchu.weixin.subscription.enums.GoodsStatusEnum;
-import com.nchu.weixin.subscription.enums.MailTypeEnum;
-import com.nchu.weixin.subscription.enums.OperateEnum;
-import com.nchu.weixin.subscription.repo.common.GoodsRepo;
+import com.nchu.weixin.subscription.repo.primary.common.GoodsRepo;
 import com.nchu.weixin.subscription.service.common.GoodsService;
 import com.nchu.weixin.subscription.tools.DateHepler;
 import com.nchu.weixin.subscription.tools.UUidUtil;

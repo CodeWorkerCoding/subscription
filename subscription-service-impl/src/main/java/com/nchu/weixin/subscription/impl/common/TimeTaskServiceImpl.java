@@ -2,7 +2,7 @@ package com.nchu.weixin.subscription.impl.common;
 
 import com.nchu.weixin.subscription.domain.component.TimeTask;
 import com.nchu.weixin.subscription.enums.component.TimeTaskConditionEnum;
-import com.nchu.weixin.subscription.repo.common.TimeTaskRepo;
+import com.nchu.weixin.subscription.repo.primary.common.TimeTaskRepo;
 import com.nchu.weixin.subscription.service.common.TimeTaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

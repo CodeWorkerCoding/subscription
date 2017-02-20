@@ -14,7 +14,7 @@
     <script type="text/javascript">
         function sendOperate(goodsId, operate) {
             $.get('${ctx}/manage/goods/operate',
-                    {goodsId: goodsId, operate: goodsId}, function (data) {
+                    {goodsId: goodsId, operate: operate}, function (data) {
                         alert(data.msg);
                     });
         }

@@ -2,6 +2,7 @@ package com.nchu.weixin.subscription.common;
 
 import org.junit.Test;
 
+import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -89,6 +90,43 @@ public class CommonTest {
 
         public Book() {
         }
+    }
+
+    @Test
+    public void fakeIndexOper(){
+        int a = 10;
+        int b = 20;
+        method2(a, b);
+        System.out.println(String.format("a=%s", a));
+        System.out.println(String.format("b=%s", b));
+    }
+    private void methodErr(int a, int b){
+        a = a * 10;
+        b = b * 10;
+    }
+    private void  method1(int a, int b){
+        System.out.println(String.format("a=%s", a * 10));
+        System.out.println(String.format("b=%s", b * 10));
+        System.exit(0);
+    }
+
+    private void method2(int a, int b){
+        PrintStream stream = new PrintStream(System.out) {
+            /**
+             * Prints a string.  If the argument is <code>null</code> then the string
+             * <code>"null"</code> is printed.  Otherwise, the string's characters are
+             * converted into bytes according to the platform's default character
+             * encoding, and these bytes are written in exactly the manner of the
+             * <code>{@link #write(int)}</code> method.
+             *
+             * @param s The <code>String</code> to be printed
+             */
+            @Override
+            public void print(String s) {
+                super.print(s.replace(a + "",  a*10 + "").replace(b + "",  b*10 + ""));
+            }
+        };
+        System.setOut(stream);
     }
 
 }

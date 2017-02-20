@@ -3,7 +3,7 @@ package com.nchu.weixin.subscription.impl.common;
 import com.nchu.weixin.subscription.domain.Order;
 import com.nchu.weixin.subscription.enums.MailTypeEnum;
 import com.nchu.weixin.subscription.enums.OperateEnum;
-import com.nchu.weixin.subscription.repo.common.OrderRepo;
+import com.nchu.weixin.subscription.repo.primary.common.OrderRepo;
 import com.nchu.weixin.subscription.service.common.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
