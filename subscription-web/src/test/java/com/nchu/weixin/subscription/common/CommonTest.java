@@ -129,4 +129,12 @@ public class CommonTest {
         System.setOut(stream);
     }
 
+    @Test
+    public void getCurrentPath(){
+        System.out.println(this.getClass().getResource("/").getPath());
+        System.out.println(System.getProperty("user.dir").replace("\\", "/"));
+        System.out.println(System.getProperty("os.name"));
+        System.out.println(System.getProperty("java.vm.version"));
+    }
+
 }
