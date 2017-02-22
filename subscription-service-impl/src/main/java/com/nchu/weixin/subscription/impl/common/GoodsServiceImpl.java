@@ -9,7 +9,6 @@ import com.nchu.weixin.subscription.tools.UUidUtil;
 import com.nchu.weixin.subscription.utils.JedisUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -39,8 +38,7 @@ public class GoodsServiceImpl implements GoodsService {
     @Autowired
     JedisUtil jedisUtil;
 
-    @Value("${weixin.goods.image.base.path}")
-    private String goodsImageUploadPath;
+    private String goodsImageUploadPath = System.getProperty("user.dir");
 
     public Goods get(String id) {
         return goodsRepo.getOne(id);

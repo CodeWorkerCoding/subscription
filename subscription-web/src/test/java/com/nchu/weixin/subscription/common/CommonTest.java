@@ -2,6 +2,7 @@ package com.nchu.weixin.subscription.common;
 
 import org.junit.Test;
 
+import java.io.File;
 import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Map;
@@ -135,6 +136,25 @@ public class CommonTest {
         System.out.println(System.getProperty("user.dir").replace("\\", "/"));
         System.out.println(System.getProperty("os.name"));
         System.out.println(System.getProperty("java.vm.version"));
+    }
+
+    @Test
+    public void createFileWithUserdir() throws Exception{
+        StringBuffer path = new StringBuffer(System.getProperty("user.dir"));
+        path.append(File.separator).append("test/test.txt");
+
+        System.out.println("path" + path);
+        File file = new File(path.toString());
+        if (!file.exists()){
+            if (!file.getParentFile().exists()){
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+            } else {
+                file.createNewFile();
+            }
+
+        }
+
     }
 
 }
