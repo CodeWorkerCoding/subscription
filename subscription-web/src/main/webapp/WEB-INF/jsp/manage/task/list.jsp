@@ -67,26 +67,28 @@
                     </thead>
                     <tbody>
                     <c:forEach items="${tts}" var="tt">
-                        <td>${tt.id}</td>
-                        <td>${tt.taskName}</td>
-                        <td>${tt.cronRule}</td>
-                        <td>${tt.executeContext}</td>
-                        <td>${tt.status.desc}</td>
-                        <td>${tt.taskCondition.desc}</td>
-                        <%--<td>${tt.createdTime}</td>--%>
-                        <td><fmt:formatDate value="${tt.createdTime}" pattern="yyyy-MM-dd"/></td>
-                        <td><fmt:formatDate value="${tt.modifiedTime}" pattern="yyyy-MM-dd"/> </td>
-                        <td>
-                            <a href="${ctx}/manage/task/${tt.id}/modify" class="btn btn-primary">修改</a>
-                            <c:if test="${tt.status == TimeTaskStatusEnum.ENABLE}">
-                                <a class="btn btn-primary" type="button" href="${ctx}/manage/task/disable?taskId=${tt.id}">${TimeTaskStatusEnum.DISABLE.desc}</a>
-                            </c:if>
-                            <c:if test="${tt.status == TimeTaskStatusEnum.DISABLE}">
-                                <a class="btn btn-primary" type="button" href="${ctx}/manage/task/enable?taskId=${tt.id}">${TimeTaskStatusEnum.ENABLE.desc}</a>
-                            </c:if>
-                            <button class="btn btn-primary" onclick="executeOnce('execute');">执行一次</button>
-                            <a href="${ctx}/#" class="btn btn-danger">删除</a>
-                        </td>
+                        <tr>
+                            <td>${tt.id}</td>
+                            <td>${tt.taskName}</td>
+                            <td>${tt.cronRule}</td>
+                            <td>${tt.executeContext}</td>
+                            <td>${tt.status.desc}</td>
+                            <td>${tt.taskCondition.desc}</td>
+                                <%--<td>${tt.createdTime}</td>--%>
+                            <td><fmt:formatDate value="${tt.createdTime}" pattern="yyyy-MM-dd"/></td>
+                            <td><fmt:formatDate value="${tt.modifiedTime}" pattern="yyyy-MM-dd"/> </td>
+                            <td>
+                                <a href="${ctx}/manage/task/${tt.id}/modify" class="btn btn-primary">修改</a>
+                                <c:if test="${tt.status == TimeTaskStatusEnum.ENABLE}">
+                                    <a class="btn btn-primary" type="button" href="${ctx}/manage/task/disable?taskId=${tt.id}">${TimeTaskStatusEnum.DISABLE.desc}</a>
+                                </c:if>
+                                <c:if test="${tt.status == TimeTaskStatusEnum.DISABLE}">
+                                    <a class="btn btn-primary" type="button" href="${ctx}/manage/task/enable?taskId=${tt.id}">${TimeTaskStatusEnum.ENABLE.desc}</a>
+                                </c:if>
+                                <button class="btn btn-primary" onclick="executeOnce('execute');">执行一次</button>
+                                <a href="${ctx}/#" class="btn btn-danger">删除</a>
+                            </td>
+                        </tr>
                     </c:forEach>
                     </tbody>
                 </table>

@@ -1,9 +1,12 @@
 package com.nchu.weixin.subscription.impl.common;
 
 import com.nchu.weixin.subscription.domain.Goods;
+import com.nchu.weixin.subscription.domain.Index;
 import com.nchu.weixin.subscription.enums.GoodsStatusEnum;
+import com.nchu.weixin.subscription.enums.IndexTypeEnum;
 import com.nchu.weixin.subscription.repo.primary.common.GoodsRepo;
 import com.nchu.weixin.subscription.service.common.GoodsService;
+import com.nchu.weixin.subscription.service.common.IndexService;
 import com.nchu.weixin.subscription.tools.DateHepler;
 import com.nchu.weixin.subscription.tools.UUidUtil;
 import com.nchu.weixin.subscription.utils.JedisUtil;
@@ -30,15 +33,19 @@ public class GoodsServiceImpl implements GoodsService {
     private final static String GOODS_COUNT_NUM_KEY = "GOODS_COUNT_NUM_KEY";
 
     @Autowired
-    BaseService baseService;
+    private BaseService baseService;
 
     @Autowired
-    GoodsRepo goodsRepo;
+    private GoodsRepo goodsRepo;
 
     @Autowired
-    JedisUtil jedisUtil;
+    private IndexService indexService;
 
-    private String goodsImageUploadPath = System.getProperty("user.dir");
+    @Autowired
+    private JedisUtil jedisUtil;
+
+//    private String goodsImageUploadPath = System.getProperty("user.dir");
+    private String goodsImageUploadPath = "E:\\Code\\JetBrain\\java\\github\\subscription\\subscription-web";
 
     public Goods get(String id) {
         return goodsRepo.getOne(id);
@@ -68,23 +75,37 @@ public class GoodsServiceImpl implements GoodsService {
     public Goods create(Goods goods, MultipartFile iconImg) throws Exception {
         String originalName = iconImg.getOriginalFilename();
         String iconImgSubffix = originalName.substring(originalName.lastIndexOf("."), originalName.length());
-        StringBuilder relative = new StringBuilder("static/images/goods/")
+        StringBuilder relative = new StringBuilder(goodsImageUploadPath)
+                .append(File.separator).append("src/main/webapp/static/images/goods/")
                 .append(goods.getGoodsName()).append("/");
         String targetName = UUidUtil.generateShortUUid() + iconImgSubffix;
+        relative.append(targetName);
+        log.info("商品【{}】图片保存路径:{}", goods.getGoodsName(), relative.toString());
         File file = null;
         try {
-            File filePath = new File(goodsImageUploadPath + relative.toString());
-            if (!filePath.exists()) filePath.mkdirs();
-            file = new File(goodsImageUploadPath + relative.append(targetName).toString());
+            file = new File(relative.toString());
+            if (!file.getParentFile().exists()){
+                file.getParentFile().mkdirs();
+            }
             iconImg.transferTo(file);
-            Long goodNum = jedisUtil.incr(GOODS_COUNT_NUM_KEY);
-            String temp = DateHepler.convertDateToDisplayStr(new Date(), DateHepler.DF_YYYYMMDDHH);
-            goods.setStatus(GoodsStatusEnum.WAIT_SHELVE);
-            goods.setGoodsNo(temp+goodNum);
-            goods.setSaleCount(0);
-            goods.setGoodsImgPath(relative.toString());
-            goods = create(goods);
-            return goods;
+            //Long goodNum = jedisUtil.incr(GOODS_COUNT_NUM_KEY);
+            String date = DateHepler.convertDateToDisplayStr(new Date(), DateHepler.DF_YYYY_MM_DD);
+            synchronized (date.intern()){
+                Index index = this.indexService.getByDateAndType(date, IndexTypeEnum.GOODS);
+                if (index == null){
+                    index = new Index(date, IndexTypeEnum.GOODS);
+                }
+                int goodNum = null == index.getIndexCount() ? 1 : index.getIndexCount() + 1;
+                String temp = DateHepler.convertDateToDisplayStr(new Date(), DateHepler.DF_YYYYMMDDHH);
+                goods.setStatus(GoodsStatusEnum.WAIT_SHELVE);
+                goods.setGoodsNo(temp+goodNum);
+                goods.setSaleCount(0);
+                goods.setGoodsImgPath(relative.toString());
+                goods = create(goods);
+                index.setIndexCount(goodNum);
+                this.indexService.modify(index);
+                return goods;
+            }
         } catch (Exception e) {
             log.error("创建一个商品信息出错", e);
             if (file != null && file.exists()) {

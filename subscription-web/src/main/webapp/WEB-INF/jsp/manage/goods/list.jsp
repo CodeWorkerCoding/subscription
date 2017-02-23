@@ -55,27 +55,29 @@
                 </thead>
                 <tbody>
                 <c:forEach items="${gds}" var="gs">
-                    <td>${gs.goodsNo}</td>
-                    <td>
-                        <a href="${ctx}/manage/goods/${gs.id}/info">${gs.goodsName}</a>
-                    </td>
-                    <td>${gs.goodsDesc}</td>
-                    <td>${gs.goodsPrice}</td>
-                    <td>${gs.goodsType.desc}</td>
-                    <td>${gs.saleCount}</td>
-                    <td>${gs.status.desc}</td>
-                    <td>${gs.createdTime}</td>
-                    <td>${gs.modifiedTime}</td>
-                    <td>
-                        <a href="${ctx}/manage/goods/${gs.id}/modify" class="btn btn-primary">修改</a>
-                        <button class="btn btn-primary"
-                                onclick="sendOperate(${gs.id}, ${OperateEnum.RELEASE.value}})">${OperateEnum.RELEASE.desc}</button>
-                        <button class="btn btn-primary"
-                                onclick="sendOperate(${gs.id}, ${OperateEnum.REBACK.value}})">${OperateEnum.REBACK.desc}</button>
-                        <button class="btn btn-primary"
-                                onclick="sendOperate(${gs.id}, ${OperateEnum.UNSHELVE.value}})">${OperateEnum.UNSHELVE.desc}</button>
-                        <a href="${ctx}/#" class="btn btn-danger">删除</a>
-                    </td>
+                    <tr>
+                        <td>${gs.goodsNo}</td>
+                        <td>
+                            <a href="${ctx}/manage/goods/${gs.id}/info">${gs.goodsName}</a>
+                        </td>
+                        <td>${gs.goodsDesc}</td>
+                        <td>${gs.goodsPrice}</td>
+                        <td>${gs.goodsType.desc}</td>
+                        <td>${gs.saleCount}</td>
+                        <td>${gs.status.desc}</td>
+                        <td>${gs.createdTime}</td>
+                        <td>${gs.modifiedTime}</td>
+                        <td>
+                            <a href="${ctx}/manage/goods/${gs.id}/modify" class="btn btn-primary">修改</a>
+                            <button class="btn btn-primary"
+                                    onclick="sendOperate(${gs.id}, ${OperateEnum.RELEASE.value}})">${OperateEnum.RELEASE.desc}</button>
+                            <button class="btn btn-primary"
+                                    onclick="sendOperate(${gs.id}, ${OperateEnum.REBACK.value}})">${OperateEnum.REBACK.desc}</button>
+                            <button class="btn btn-primary"
+                                    onclick="sendOperate(${gs.id}, ${OperateEnum.UNSHELVE.value}})">${OperateEnum.UNSHELVE.desc}</button>
+                            <a href="${ctx}/#" class="btn btn-danger">删除</a>
+                        </td>
+                    </tr>
                 </c:forEach>
                 </tbody>
             </table>

@@ -139,6 +139,12 @@ public class CommonTest {
     }
 
     @Test
+    public void getClasspath(){
+        String path = this.getClass().getResource("/").getPath();
+        System.out.println(path);
+    }
+
+    @Test
     public void createFileWithUserdir() throws Exception{
         StringBuffer path = new StringBuffer(System.getProperty("user.dir"));
         path.append(File.separator).append("test/test.txt");
