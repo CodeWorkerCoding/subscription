@@ -45,7 +45,8 @@ public class GoodsServiceImpl implements GoodsService {
     private JedisUtil jedisUtil;
 
 //    private String goodsImageUploadPath = System.getProperty("user.dir");
-    private String goodsImageUploadPath = "E:\\Code\\JetBrain\\java\\github\\subscription\\subscription-web";
+//    private String goodsImageUploadPath = "E:\\Code\\JetBrain\\java\\github\\subscription\\subscription-web";
+    private String goodsImageUploadPath = "/data/tomcat8_test/webapps/ROOT/static/images/goods/";
 
     public Goods get(String id) {
         return goodsRepo.getOne(id);
@@ -76,8 +77,7 @@ public class GoodsServiceImpl implements GoodsService {
         String originalName = iconImg.getOriginalFilename();
         String iconImgSubffix = originalName.substring(originalName.lastIndexOf("."), originalName.length());
         StringBuilder relative = new StringBuilder(goodsImageUploadPath)
-                .append(File.separator).append("src/main/webapp/static/images/goods/")
-                .append(goods.getGoodsName()).append("/");
+                .append(File.separator).append(goods.getGoodsName()).append("/");
         String targetName = UUidUtil.generateShortUUid() + iconImgSubffix;
         relative.append(targetName);
         log.info("商品【{}】图片保存路径:{}", goods.getGoodsName(), relative.toString());

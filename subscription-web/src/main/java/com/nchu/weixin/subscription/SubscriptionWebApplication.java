@@ -10,7 +10,8 @@ import org.springframework.context.annotation.ImportResource;
 @Configurable
 @EnableAutoConfiguration
 @SpringBootApplication
-@ImportResource(value = {"classpath:static/application-security.xml"})
+@ImportResource(value = {"classpath:static/application-security.xml",
+	"classpath:dubbo/dubbo-consumer.xml"})
 public class SubscriptionWebApplication {
 
 	public static void main(String[] args) {
