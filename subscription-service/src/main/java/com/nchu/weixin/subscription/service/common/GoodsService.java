@@ -1,11 +1,8 @@
 package com.nchu.weixin.subscription.service.common;
 
-import com.nchu.weixin.subscription.domain.Goods;
-import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.util.Map;
+import com.nchu.weixin.subscription.domain.Goods;
 
 /**
  * 订单服务
